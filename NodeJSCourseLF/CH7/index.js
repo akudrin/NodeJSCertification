@@ -1,6 +1,9 @@
 'use strict';
 const format = require('./format');
 const print = require('./print');
+const add = require('./additionfuncexport');
+
+console.log(add(19, 23));
 
 if (require.main === module) {
   const pino = require('pino');

@@ -1,3 +1,4 @@
+//callback
 function myAsyncOperation(cb) {
   doSomethingAsynchronous((err, value) => {
     cb(err, value);

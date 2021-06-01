@@ -24,14 +24,30 @@ const opC = (cb) => {
   }, 125);
 };
 
+const a = () =>
+  new Promise((resolve, reject) => {
+    opA((err, value) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(value);
+      }
+    });
+  });
+
 const promA = promisify(opA);
 const promB = promisify(opB);
 const promC = promisify(opC);
 
 async function run() {
-  print(0, await promA());
-  print(0, await promB());
-  print(0, await promC());
+  try {
+    print(null, await a());
+    print(0, await promA());
+    print(0, await promB());
+    print(0, await promC());
+  } catch (err) {
+    print(err);
+  }
 }
 
 run().catch(console.error);
@@ -49,3 +65,31 @@ async function printer() {
  
 printer()
 */
+
+/* opA((err, value) => {
+  print(err, value);
+  opB((err, value) => {
+    print(err, value);
+    opC((err, value) => {
+      print(err, value);
+    });
+  });
+});
+ */
+
+const promiseA = promisify(opA);
+const promiseB = promisify(opB);
+const promiseC = promisify(opC);
+
+promiseA()
+  .then((res) => {
+    print(0, res);
+    return promiseB();
+  })
+  .then((res) => {
+    print(0, res);
+    return promiseC();
+  })
+  .then((res) => {
+    print(0, res);
+  });

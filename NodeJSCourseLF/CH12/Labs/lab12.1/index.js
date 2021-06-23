@@ -1,5 +1,5 @@
 'use strict'
-const { Readable, Writable, Transform, PassThrough, pipeline } = require('stream')
+const { Readable, Writable } = require('stream')
 const assert = require('assert')
 const createWritable = () => {
   const sink = []
@@ -27,17 +27,4 @@ const readable = Readable.from(['a', 'b', 'c'])
 
 const writable = createWritable()
 
-const transform = () => {  
-  return new Transform({    
-      transform (chunk, enc, next) {      
-          const uppercased = chunk.toString().toUpperCase()      
-          next(null, uppercased)    
-      }  
-  })
-}
-
-pipeline(readable, transform(), writable, (err) => {
-assert.ifError(err)
-assert.deepStrictEqual(writable.sink, ['A', 'B', 'C'])
-console.log('passed!')
-})
+readable.pipe(writable);

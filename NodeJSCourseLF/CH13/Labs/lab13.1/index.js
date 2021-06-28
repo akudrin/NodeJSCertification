@@ -20,7 +20,7 @@ function exercise () {
     }
     console.log('FILES IN DIRECTORY', files)
     console.log(Array.isArray(files));
-        
+    files.sort();
     var commaDelimited = files.join(", ");
     console.log(commaDelimited);
     

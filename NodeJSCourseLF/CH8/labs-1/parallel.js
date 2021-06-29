@@ -25,7 +25,7 @@ opC(print);
 opB(print);
 opA(print);
 
-/* //C >>> B >>> A
+//C >>> B >>> A
 async function run() {
   await opC(print);
   await opB(print);
@@ -33,4 +33,3 @@ async function run() {
 }
 
 run().catch(console.error);
- */
